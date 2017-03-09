@@ -142,20 +142,20 @@ this.props.lang; // en
    - **namespace**: *string* (default: **null**) path to the translations that translator will be limited to
  - returns **translator**: *object*
  - example
-     ```javascript
-     import getT from 'mi18n';
-
-     class MyComponent {
-       // ... your component here 
-     }
-     
-     connect(
-       state => ({
-         translator: getT(state.i18n),
-         namespacedTranslator: getT(state.i18n, 'users'),
-       })
-     )(MyComponent);
-     ```
+    ```javascript
+    import getT from 'mi18n';
+    
+    class MyComponent {
+     // ... your component here 
+    }
+    
+    connect(
+     state => ({
+       translator: getT(state.i18n),
+       namespacedTranslator: getT(state.i18n, 'users'),
+     })
+    )(MyComponent);
+    ```
     
 ### `translator`
  - methods
@@ -165,14 +165,14 @@ this.props.lang; // en
        - **replace**: *object* parameters that should be replaced in the translations
        - **number**: *number* number needed to decide which pluralizable translation to choose
      - methods
-       - `translator.translate.capitalize(path, [replace, number])`: *function* works like translate but returns capitalized translation
-       - `translator.translate.toUpper(path, [replace, number])`: *function* works like translate but returns uppercase translation
-       - `translator.translate.toLower(path, [replace, number])`: *function* works like translate but returns lowercase translation
-       - `translator.translate.camelCase(path, [replace, number])`: *function* works like translate but returns camelcase translation
-       - `translator.translate.lowerCase(path, [replace, number])`: *function* works like translate but returns lowercase translation
-       - `translator.translate.lowerFirst(path, [replace, number])`: *function* works like translate but returns translation with first letter changed to lowercase
-       - `translator.translate.titleCase(path, [replace, number])`: *function* works like translate but returns translation with first letter changed to uppercase
-       - `translator.translate.deburr(path, [replace, number])`: *function* works like translate but returns translation with all non latin letters changed to their latin counterparts
+        - `translator.translate.capitalize(path, [replace, number])`: *function* works like translate but returns capitalized translation
+        - `translator.translate.toUpper(path, [replace, number])`: *function* works like translate but returns uppercase translation
+        - `translator.translate.toLower(path, [replace, number])`: *function* works like translate but returns lowercase translation
+        - `translator.translate.camelCase(path, [replace, number])`: *function* works like translate but returns camelcase translation
+        - `translator.translate.lowerCase(path, [replace, number])`: *function* works like translate but returns lowercase translation
+        - `translator.translate.lowerFirst(path, [replace, number])`: *function* works like translate but returns translation with first letter changed to lowercase
+        - `translator.translate.titleCase(path, [replace, number])`: *function* works like translate but returns translation with first letter changed to uppercase
+        - `translator.translate.deburr(path, [replace, number])`: *function* works like translate but returns translation with all non latin letters changed to their latin counterparts
    - `translator.t(path, [replace, number])`: alias for `translator.translate`
    - `translator.namespace(namespace, [absolute])`: *function*
      - arguments
