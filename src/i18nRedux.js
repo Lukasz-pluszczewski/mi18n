@@ -25,7 +25,7 @@ export function setLanguage(languageCode, translations) {
  * Reducer for managing language change
  * @param {object} state
  * @param {object} action
- * @returns {object} new state
+ * @return {object} new state
  */
 export function reducer(state = initialState, action) {
   switch (action.type) {

@@ -2,7 +2,11 @@ import _ from 'lodash';
 import config from './config';
 
 // Setting up simple logger until actual logger library will be published
-logger.translations = (...args) => console.log('mi18n', ...args);
+const logger = {
+  translations(...args) {
+    console.log('mi18n', ...args); // eslint-disable-line no-console
+  },
+};
 
 /**
  * Replaces all occurrences of 'search' in 'string' with 'replace'
