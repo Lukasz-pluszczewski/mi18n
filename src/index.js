@@ -1,6 +1,12 @@
-export default from './i18nService';
-export {
-  setLanguage,
-  reducer,
-  actionType,
+import getT from './i18nService';
+import {
+  setLanguage as setLangImport,
+  reducer as reducerImport,
+  actionType as actionTypeImport,
 } from './i18nRedux';
+
+export default getT;
+
+export const setLanguage = setLangImport;
+export const reducer = reducerImport;
+export const actionType = actionTypeImport;

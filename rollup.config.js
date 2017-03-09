@@ -7,7 +7,9 @@ const external = Object.keys(pkg.dependencies);
 export default {
   entry: 'src/index.js',
   plugins: [
-    babel(babelrc()),
+    babel(babelrc({
+      addModuleOptions: false,
+    })),
   ],
   external: external,
   exports: 'named',
