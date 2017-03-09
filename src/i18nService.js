@@ -3,7 +3,7 @@ import config from './config';
 
 // mocked logger until publishing logger library
 /* eslint-disable no-empty-function */
-global.logger = new Proxy(function() {}, {
+window.logger = new Proxy(function() {}, {
   get: function(target, name) {
     return function(...args) {
       console.log(...args);
