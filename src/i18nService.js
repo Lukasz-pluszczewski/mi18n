@@ -1,16 +1,8 @@
 import _ from 'lodash';
 import config from './config';
 
-// mocked logger until publishing logger library
-/* eslint-disable no-empty-function */
-window.logger = new Proxy(function() {}, {
-  get: function(target, name) {
-    return function(...args) {
-      console.log(...args);
-    };
-  },
-  apply: function(target, thisArg, argumentsList) {},
-});
+// Setting up simple logger until actual logger library will be published
+logger.translations = (...args) => console.log('mi18n', ...args);
 
 /**
  * Replaces all occurrences of 'search' in 'string' with 'replace'
@@ -47,9 +39,9 @@ export const translatorFactory = {
       if (translatorFactory.cachedTranslators[translatorNamespace]) {
         return translatorFactory.cachedTranslators[translatorNamespace];
       }
-      logger.translations(`No translator cached for namespace '${translatorNamespace || null}' in language ${state.languageCode}`);
+      // logger.translations(`No translator cached for namespace '${translatorNamespace || null}' in language ${state.languageCode}`);
     } else {
-      logger.translations(`Language changed from ${translatorFactory.cachedState ? translatorFactory.cachedState.languageCode : 'None'} to ${state.languageCode}. Requested namespace '${translatorNamespace || null}'. Clearing cache.`);
+      // logger.translations(`Language changed from ${translatorFactory.cachedState ? translatorFactory.cachedState.languageCode : 'None'} to ${state.languageCode}. Requested namespace '${translatorNamespace || null}'. Clearing cache.`);
       translatorFactory.cachedTranslators = {};
       translatorFactory.cachedState = null;
     }
