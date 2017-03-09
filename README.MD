@@ -142,20 +142,20 @@ this.props.lang; // en
    - **namespace**: *string* (default: **null**) path to the translations that translator will be limited to
  - returns **translator**: *object*
  - example
-     ```javascript
-     import getT from 'mi18n';
-
-     class MyComponent {
-       // ... your component here 
-     }
-     
-     connect(
-       state => ({
-         translator: getT(state.i18n),
-         namespacedTranslator: getT(state.i18n, 'users'),
-       })
-     )(MyComponent);
-     ```
+    ```javascript
+    import getT from 'mi18n';
+    
+    class MyComponent {
+     // ... your component here 
+    }
+    
+    connect(
+     state => ({
+       translator: getT(state.i18n),
+       namespacedTranslator: getT(state.i18n, 'users'),
+     })
+    )(MyComponent);
+    ```
     
 ### `translator`
  - methods
