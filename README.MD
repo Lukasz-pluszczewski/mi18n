@@ -5,7 +5,7 @@ i18n with redux made easy
 `npm i --save mi18n`
 
 ## Note
- * Work in progress. Please do not use this library on production!
+ * Work in progress. Please do not use this library on production yet!
  * Npm package may not be yet available!
 
 ## Usage
@@ -94,6 +94,8 @@ With this lib you can:
 * always be sure that changing language will trigger update for those components that needs that and you're able to use functions for translation at the same time.
 * namespace translators (useful when crating reusable components)
 * download and set translations asynchronously
+* use translations with parameters (documentation coming soon)
+* have pluralizable translations (multilingual - documentation coming soon)
 * do all of that easily :)
 
 ##### Why not using components to show translated texts?
