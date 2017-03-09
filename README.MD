@@ -114,26 +114,26 @@ this.props.lang; // en
    - **translation with parameters**: *string* translation in the form of 'Some unchangeable text and {{parameter}}!'
  - example
  in english:
-     ```javascript
-     const enTranslations = {
-       main: {
-         title: 'My awesome translated app'
-       },
-       pluralizable: {
-         dog: [
-           'dog',
-           'dogs',
-         ],
-         person: [
-           'person',
-           'people',
-         ],
-       },
-       withParams: {
-         welcome: 'Hello {{user}}! How are you?',
-       },
-     }
-     ```
+    ```javascript
+    const enTranslations = {
+      main: {
+       title: 'My awesome translated app'
+      },
+      pluralizable: {
+       dog: [
+         'dog',
+         'dogs',
+       ],
+       person: [
+         'person',
+         'people',
+       ],
+      },
+      withParams: {
+       welcome: 'Hello {{user}}! How are you?',
+      },
+    }
+    ```
    
 #### `getT(state, [namespace])`
  - `import getT from 'mi18n'`
