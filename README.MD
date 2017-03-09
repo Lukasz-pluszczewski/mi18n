@@ -28,7 +28,7 @@ import { setLanguage } from 'services/i18n';
 
 store.dispatch(setLanguage('en', enTranslations));
 ```
-or
+or inside the component connected with redux state
 ```javascript
 import { setLanguage } from 'services/i18n';
 
