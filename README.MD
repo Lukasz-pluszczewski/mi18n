@@ -173,8 +173,8 @@ this.props.lang; // en
    - `translator.translate(path, [replace, number])`: *function*
      - arguments
        - **path**: *string* path to the given translation, must point to string or array not nested object
-       - **replace**: *object* parameters that should be replaced in the translations
-       - **number**: *number* number needed to decide which pluralizable translation to choose
+        - **replace**: *object* parameters that should be replaced in the translations
+         - **number**: *number* number needed to decide which pluralizable translation to choose
      - methods
         - `translator.translate.capitalize(path, [replace, number])`: *function* works like translate but returns capitalized translation
         - `translator.translate.toUpper(path, [replace, number])`: *function* works like translate but returns uppercase translation
