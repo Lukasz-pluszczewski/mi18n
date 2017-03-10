@@ -1,11 +1,18 @@
 import _ from 'lodash';
+import debug from 'debug';
 import config from './config';
 
-// Setting up simple logger until actual logger library will be published
+// Setting up logger
 const logger = {
-  translations(...args) {
-    console.log('mi18n', ...args); // eslint-disable-line no-console
+  info(...args) {
+    debug('mi18n-redux:info')(...args);
   },
+  error(...args) {
+    debug('mi18n-redux:error')(...args);
+  },
+  namespaceError(...args) {
+    debug('mi18n-redux:namespace-error')(...args);
+  }
 };
 
 /**
@@ -43,9 +50,9 @@ export const translatorFactory = {
       if (translatorFactory.cachedTranslators[translatorNamespace]) {
         return translatorFactory.cachedTranslators[translatorNamespace];
       }
-      // logger.translations(`No translator cached for namespace '${translatorNamespace || null}' in language ${state.languageCode}`);
+      logger.info(`No translator cached for namespace '${translatorNamespace || null}' in language ${state.languageCode}`);
     } else {
-      // logger.translations(`Language changed from ${translatorFactory.cachedState ? translatorFactory.cachedState.languageCode : 'None'} to ${state.languageCode}. Requested namespace '${translatorNamespace || null}'. Clearing cache.`);
+      logger.info(`Language changed from ${translatorFactory.cachedState ? translatorFactory.cachedState.languageCode : 'None'} to ${state.languageCode}. Requested namespace '${translatorNamespace || null}'. Clearing cache.`);
       translatorFactory.cachedTranslators = {};
       translatorFactory.cachedState = null;
     }
@@ -93,14 +100,14 @@ export const translatorFactory = {
        */
       getPlural(number, forms) {
         if (!_.isArray(forms)) {
-          logger.translations(`${config.errors.i18n.pluralNotArray}`, {
+          logger.error(`${config.errors.i18n.pluralNotArray}`, {
             number,
             forms,
           });
           return forms;
         }
         if (!_.isNumber(number)) {
-          logger.translations(`${config.errors.i18n.pluralNotNumber}`, {
+          logger.error(`${config.errors.i18n.pluralNotNumber}`, {
             number,
             forms,
           });
@@ -150,7 +157,7 @@ export const translatorFactory = {
         if (_.isString(absolutePath) && absolutePath) {
           const namespacedTranslations = _.get(this.state.translations, absolutePath);
           if (!namespacedTranslations) {
-            logger.translations(config.errors.i18n.namespaceNotFound, {
+            logger.namespaceError(config.errors.i18n.namespaceNotFound, {
               language: this.state.languageCode,
               translatorNamespace: this.translatorNamespace,
               providedNamespace: namespacePath,
@@ -158,7 +165,7 @@ export const translatorFactory = {
               absolutePath,
             });
           } else if (_.isString(namespacedTranslations)) {
-            logger.translations(config.errors.i18n.namespaceNotObject, {
+            logger.namespaceError(config.errors.i18n.namespaceNotObject, {
               language: this.state.languageCode,
               translatorNamespace: this.translatorNamespace,
               providedNamespace: namespacePath,
@@ -182,7 +189,7 @@ export const translatorFactory = {
         const joinedPath = filteredPath.join('.');
         let result = _.get(this.state.translations, joinedPath, false);
         if (result === false) {
-          logger.translations(`${config.errors.i18n.translationNotFound}: "${joinedPath}"`, {
+          logger.error(`${config.errors.i18n.translationNotFound}: "${joinedPath}"`, {
             language: this.state.languageCode,
             translatorNamespace: this.translatorNamespace,
             providedPath: path,
@@ -191,7 +198,7 @@ export const translatorFactory = {
           return { result, joinedPath };
         }
         if (_.isPlainObject(result)) {
-          logger.translations(`${config.errors.i18n.translationNotString}`, {
+          logger.error(`${config.errors.i18n.translationNotString}`, {
             language: this.state.languageCode,
             translatorNamespace: this.translatorNamespace,
             providedPath: path,
