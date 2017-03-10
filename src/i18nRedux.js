@@ -1,4 +1,4 @@
-const SET_LANGUAGE = 'SET_LANGUAGE';
+const SET_LANGUAGE_ACTION = '@@SET_LANGUAGE';
 const initialState = {
   languageCode: '',
   translations: {},
@@ -16,7 +16,7 @@ const initialState = {
  */
 export function setLanguage(languageCode, translations) {
   return {
-    type: SET_LANGUAGE,
+    type: SET_LANGUAGE_ACTION,
     payload: { languageCode, translations },
   };
 }
@@ -29,7 +29,7 @@ export function setLanguage(languageCode, translations) {
  */
 export function reducer(state = initialState, action) {
   switch (action.type) {
-    case SET_LANGUAGE:
+    case SET_LANGUAGE_ACTION:
       return {
         ...state,
         languageCode: action.payload.languageCode,
@@ -40,4 +40,4 @@ export function reducer(state = initialState, action) {
   }
 }
 
-export const actionType = SET_LANGUAGE;
+export const actionType = SET_LANGUAGE_ACTION;

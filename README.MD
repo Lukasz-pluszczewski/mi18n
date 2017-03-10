@@ -37,7 +37,7 @@ store = createStore(rootReducer);
 ```javascript
 const enTranslations = {
   main: {
-    title: 'example title'
+    title: 'example title',
   },
   users: {
     addUserButton: 'Add new user',
@@ -111,8 +111,8 @@ this.props.lang; // en
    - **languageCode**: *string* New language code (e.g. 'en')
    - **translations**: *object* Object with new translations
    
-#### `actionType`
- - `import { actionType as CHANGE_LANGUAGE_ACTION } from 'i18n'`
+#### `SET_LANGUAGE_ACTION`
+ - `import { SET_LANGUAGE_ACTION } from 'i18n'`
  - Action type of action created by setLanguage action creator
  - Can be used to create custom action creators or custom reducers
 
