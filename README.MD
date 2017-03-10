@@ -220,6 +220,11 @@ this.props.lang; // en
      }
      ```
 
+## TODO
+ * Make transformation methods chainable
+ * Make documentation easier to understand ;)
+ * Add example app
+
 ## Other i18n libraries (in arbitrary order)
 * [i18n-react](https://github.com/alexdrel/i18n-react)
 * [react-i18next](https://github.com/i18next/react-i18next)
