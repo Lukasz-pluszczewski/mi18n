@@ -2,7 +2,7 @@
 
 i18n with redux made easy
 
-`npm i --save mi18n`
+`npm i --save mi18n-redux`
 
 ## FAQ
 ##### Why this exists?
@@ -23,7 +23,7 @@ Components approach looks nice and consistent with the rest of your React applic
 
 #### Add i18n reducer to your reducers:
 ```javascript
-import { reducer as i18nReducer } from 'mi18n';
+import { reducer as i18nReducer } from 'mi18n-redux';
 
 const rootReducer = combineReducers({
   // ...
@@ -52,13 +52,13 @@ const enTranslations = {
 
 #### Set language with translations:
 ```javascript
-import { setLanguage } from 'mi18n';
+import { setLanguage } from 'mi18n-redux';
 
 store.dispatch(setLanguage('en', enTranslations));
 ```
 or inside the component connected with redux state
 ```javascript
-import { setLanguage } from 'mi18n';
+import { setLanguage } from 'mi18n-redux';
 
 class MyComponent {
   // ... your component here 
@@ -74,7 +74,7 @@ connect(
 
 #### Connect component to translations:
 ```javascript
-import getT from 'mi18n';
+import getT from 'mi18n-redux';
 
 class MyComponent {
   // ... your component here 
@@ -100,12 +100,12 @@ this.props.lang; // en
 ## API
 
 #### `reducer`
- - `import { reducer as mi18nReducer } from 'mi18n'`
+ - `import { reducer as mi18nReducer } from 'mi18n-redux'`
  - reducer that sets language and translation in redux store
  - add it to redux store with the help of [combineReducers function](http://redux.js.org/docs/api/combineReducers.html) 
 
 #### `setLanguage`
- - `import { setLanguage } from 'mi18n'`
+ - `import { setLanguage } from 'mi18n-redux'`
  - [action creator](http://redux.js.org/docs/basics/Actions.html) which can be used to set language and translations
  - arguments
    - **languageCode**: *string* New language code (e.g. 'en')
@@ -147,14 +147,14 @@ this.props.lang; // en
     ```
    
 #### `getT(state, [namespace])`
- - `import getT from 'mi18n'`
+ - `import getT from 'mi18n-redux'`
  - arguments
    - **state**: *redux state* i18n field from redux state
    - **namespace**: *string* (default: **null**) path to the translations that translator will be limited to
  - returns **translator**: *object*
  - example
     ```javascript
-    import getT from 'mi18n';
+    import getT from 'mi18n-redux';
     
     class MyComponent {
      // ... your component here 
