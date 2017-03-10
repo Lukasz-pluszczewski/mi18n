@@ -12,8 +12,8 @@ With this lib you can:
 * always be sure that changing language will trigger update for those components that needs that and you're able to use functions for translation at the same time.
 * namespace translators (useful when crating reusable components)
 * download and set translations asynchronously
-* use translations with parameters (documentation coming soon)
-* have pluralizable translations (multilingual - documentation coming soon)
+* use translations with parameters
+* have pluralizable translations (multilingual)
 * do all of that easily :)
 
 ##### Why not using components to show translated texts?
@@ -37,7 +37,7 @@ store = createStore(rootReducer);
 ```javascript
 const enTranslations = {
   main: {
-    title: 'example title'
+    title: 'example title',
   },
   users: {
     addUserButton: 'Add new user',
@@ -111,8 +111,8 @@ this.props.lang; // en
    - **languageCode**: *string* New language code (e.g. 'en')
    - **translations**: *object* Object with new translations
    
-#### `actionType`
- - `import { actionType as CHANGE_LANGUAGE_ACTION } from 'i18n'`
+#### `SET_LANGUAGE_ACTION`
+ - `import { SET_LANGUAGE_ACTION } from 'i18n'`
  - Action type of action created by setLanguage action creator
  - Can be used to create custom action creators or custom reducers
 
@@ -173,8 +173,8 @@ this.props.lang; // en
    - `translator.translate(path, [replace, number])`: *function*
      - arguments
        - **path**: *string* path to the given translation, must point to string or array not nested object
-       - **replace**: *object* parameters that should be replaced in the translations
-       - **number**: *number* number needed to decide which pluralizable translation to choose
+        - **replace**: *object* parameters that should be replaced in the translations
+         - **number**: *number* number needed to decide which pluralizable translation to choose
      - methods
         - `translator.translate.capitalize(path, [replace, number])`: *function* works like translate but returns capitalized translation
         - `translator.translate.toUpper(path, [replace, number])`: *function* works like translate but returns uppercase translation
@@ -188,13 +188,13 @@ this.props.lang; // en
    - `translator.namespace(namespace, [absolute])`: *function*
      - arguments
        - **namespace**: *string* path to object that resulting translator should be limited to
-       - **absolute**: *boolean* (default: **false**) indicates whether namespace is absolute path or path relative to current namespace
+        - **absolute**: *boolean* (default: **false**) indicates whether namespace is absolute path or path relative to current namespace
      - returns **translator**: *object* new instance of the translator with given namespace
    - `translator.n(namespace, [absolute])`: *function* alias for `translator.namespace`
    - `translator.getTranslations(path, [absolute])`: *function*
      - arguments
        - **path**: *string* (default: **''**) path to translation object we want to get
-       - **absolute**: *boolean* (default: **false**) indicates whether provided path is asbolute or relative to current namespace
+        - **absolute**: *boolean* (default: **false**) indicates whether provided path is asbolute or relative to current namespace
      - returns **translations**: *object* object with translations at given path
    - `translator.getLanguage()`
      - returns **languageCode**: *string* current language code
@@ -219,6 +219,11 @@ this.props.lang; // en
          en: number => number === 1 ? 0 : 1,
      }
      ```
+
+## TODO
+ * Make transformation methods chainable
+ * Make documentation easier to understand ;)
+ * Add example app
 
 ## Other i18n libraries (in arbitrary order)
 * [i18n-react](https://github.com/alexdrel/i18n-react)
