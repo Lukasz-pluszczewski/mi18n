@@ -188,13 +188,13 @@ this.props.lang; // en
    - `translator.namespace(namespace, [absolute])`: *function*
      - arguments
        - **namespace**: *string* path to object that resulting translator should be limited to
-       - **absolute**: *boolean* (default: **false**) indicates whether namespace is absolute path or path relative to current namespace
+        - **absolute**: *boolean* (default: **false**) indicates whether namespace is absolute path or path relative to current namespace
      - returns **translator**: *object* new instance of the translator with given namespace
    - `translator.n(namespace, [absolute])`: *function* alias for `translator.namespace`
    - `translator.getTranslations(path, [absolute])`: *function*
      - arguments
        - **path**: *string* (default: **''**) path to translation object we want to get
-       - **absolute**: *boolean* (default: **false**) indicates whether provided path is asbolute or relative to current namespace
+        - **absolute**: *boolean* (default: **false**) indicates whether provided path is asbolute or relative to current namespace
      - returns **translations**: *object* object with translations at given path
    - `translator.getLanguage()`
      - returns **languageCode**: *string* current language code
