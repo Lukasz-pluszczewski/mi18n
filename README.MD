@@ -112,7 +112,7 @@ this.props.lang; // en
    - **translations**: *object* Object with new translations
    
 #### `SET_LANGUAGE_ACTION`
- - `import { SET_LANGUAGE_ACTION } from 'i18n'`
+ - `import { SET_LANGUAGE_ACTION } from 'i18n-redux'`
  - Action type of action created by setLanguage action creator
  - Can be used to create custom action creators or custom reducers
 
