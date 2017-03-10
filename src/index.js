@@ -7,6 +7,6 @@ import {
 
 export default getT;
 
-export const SET_LANGUAGE_ACTION = setLangImport;
+export const setLanguage = setLangImport;
 export const reducer = reducerImport;
-export const actionType = actionTypeImport;
+export const SET_LANGUAGE_ACTION = actionTypeImport;
