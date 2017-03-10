@@ -15,7 +15,7 @@ export default {
   exports: 'named',
   globals: {
     lodash: '_',
-    moment: 'moment',
+    debug: 'debug',
   },
   targets: [
     {
