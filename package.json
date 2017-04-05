@@ -1,7 +1,7 @@
 {
   "name": "mi18n-redux",
   "version": "0.1.4",
-  "description": "MINTernalization - i18n with redux made easy!",
+  "description": "MINTernationalization - i18n with redux made easy!",
   "repository": {
     "type": "git",
     "url": "https://github.com/Lukasz-pluszczewski/mi18n"
