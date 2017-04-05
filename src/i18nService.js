@@ -113,7 +113,7 @@ export const translatorFactory = {
           });
           return forms[0];
         }
-        const pluralMap = this.pluralMap[this.state.languageCode] || this.pluralMap.default;
+        const pluralMap = translator.pluralMap[translator.state.languageCode] || translator.pluralMap.default;
         return forms[pluralMap(number)];
       },
 
@@ -124,7 +124,7 @@ export const translatorFactory = {
        * @return {object|string} optionally namespaced translations
        */
       getTranslations(path, absolute = false) {
-        let absolutePath = this.translatorNamespace && !absolute ? this.translatorNamespace : '';
+        let absolutePath = translator.translatorNamespace && !absolute ? translator.translatorNamespace : '';
         if (_.isString(path) && path) {
           if (absolutePath) {
             absolutePath = `${absolutePath}.${path}`;
@@ -133,9 +133,9 @@ export const translatorFactory = {
           }
         }
         if (absolutePath) {
-          return _.get(this.state.translations, absolutePath);
+          return _.get(translator.state.translations, absolutePath);
         }
-        return this.state.translations;
+        return translator.state.translations;
       },
 
       /**
@@ -143,7 +143,7 @@ export const translatorFactory = {
        * @return {string} language code
        */
       getLanguage() {
-        return this.state.languageCode;
+        return translator.state.languageCode;
       },
 
       /**
@@ -153,21 +153,21 @@ export const translatorFactory = {
        * @return {object} translator
        */
       namespace(namespacePath, absolute = false) {
-        const absolutePath = this.translatorNamespace && !absolute ? `${this.translatorNamespace}.${namespacePath}` : namespacePath;
+        const absolutePath = translator.translatorNamespace && !absolute ? `${translator.translatorNamespace}.${namespacePath}` : namespacePath;
         if (_.isString(absolutePath) && absolutePath) {
-          const namespacedTranslations = _.get(this.state.translations, absolutePath);
+          const namespacedTranslations = _.get(translator.state.translations, absolutePath);
           if (!namespacedTranslations) {
             logger.namespaceError(config.errors.i18n.namespaceNotFound, {
-              language: this.state.languageCode,
-              translatorNamespace: this.translatorNamespace,
+              language: translator.state.languageCode,
+              translatorNamespace: translator.translatorNamespace,
               providedNamespace: namespacePath,
               absolute,
               absolutePath,
             });
           } else if (_.isString(namespacedTranslations)) {
             logger.namespaceError(config.errors.i18n.namespaceNotObject, {
-              language: this.state.languageCode,
-              translatorNamespace: this.translatorNamespace,
+              language: translator.state.languageCode,
+              translatorNamespace: translator.translatorNamespace,
               providedNamespace: namespacePath,
               absolute,
               absolutePath,
@@ -178,20 +178,20 @@ export const translatorFactory = {
         return translatorFactory.getTranslator(state, absolutePath);
       },
       n(namespacePath, absolute = false) {
-        return this.namespace(namespacePath, absolute);
+        return translator.namespace(namespacePath, absolute);
       },
 
       getTranslatedString(path, replace = null, number = null) {
-        const filteredPath = _.filter([this.translatorNamespace, path], path => _.isString(path) && path);
+        const filteredPath = _.filter([translator.translatorNamespace, path], path => _.isString(path) && path);
         if (!filteredPath.length) {
           throw new Error(config.errors.i18n.PathNotProvided);
         }
         const joinedPath = filteredPath.join('.');
-        let result = _.get(this.state.translations, joinedPath, false);
+        let result = _.get(translator.state.translations, joinedPath, false);
         if (result === false) {
           logger.error(`${config.errors.i18n.translationNotFound}: "${joinedPath}"`, {
-            language: this.state.languageCode,
-            translatorNamespace: this.translatorNamespace,
+            language: translator.state.languageCode,
+            translatorNamespace: translator.translatorNamespace,
             providedPath: path,
             absolutePath: joinedPath,
           });
@@ -199,8 +199,8 @@ export const translatorFactory = {
         }
         if (_.isPlainObject(result)) {
           logger.error(`${config.errors.i18n.translationNotString}`, {
-            language: this.state.languageCode,
-            translatorNamespace: this.translatorNamespace,
+            language: translator.state.languageCode,
+            translatorNamespace: translator.translatorNamespace,
             providedPath: path,
             absolutePath: joinedPath,
             foundTranslation: result,
@@ -208,20 +208,20 @@ export const translatorFactory = {
           return { result, joinedPath };
         }
         if (_.isArray(result)) {
-          result = this.getPlural(number, result);
+          result = translator.getPlural(number, result);
         }
         if (!_.isString(result)) {
           throw new Error(config.errors.i18n.corruptedTranslations);
         }
 
         if (replace) {
-          result = this.replace(result, replace);
+          result = translator.replace(result, replace);
         }
 
         return { result, joinedPath };
       },
       translateWithCallback(path, replace = null, number = null, cb = str => str) {
-        const result = this.getTranslatedString(path, replace, number);
+        const result = translator.getTranslatedString(path, replace, number);
         if (result.result === false) {
           return result.joinedPath;
         }
@@ -236,7 +236,7 @@ export const translatorFactory = {
        * @return {string} translated text or path when not found
        */
       translate(path, replace = null, number = null) {
-        const result = this.getTranslatedString(path, replace, number);
+        const result = translator.getTranslatedString(path, replace, number);
         if (result.result === false) {
           return result.joinedPath;
         }
