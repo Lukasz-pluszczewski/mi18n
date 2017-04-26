@@ -47,6 +47,7 @@ const enTranslations = {
       text: 'This action cannot be undone',
     },
   },
+  translationWithDiacritics: 'ąóść'
 }
 ```
 
@@ -92,9 +93,23 @@ connect(
 #### Using translator
 ```javascript
 this.props.translator.t('main.title'); // example title
-this.props.translator.t.titleCase('main.title'); // Example title
 this.props.namespacedTranslator.t('addUserButton'); // Add new user
 this.props.lang; // en
+```
+
+#### Using helper methods
+```javascript
+this.props.translator.t('translationWithDiacritics'); // ąóść
+this.props.translator.deburr().t('translationWithDiacritics'); // aosc
+this.props.translator.deburr().toUpper().t('translationWithDiacritics'); // AOSC
+this.props.translator.capitalize().t('main.title'); // Example title
+this.props.translator.camelCase().t('main.title'); // exampleTitle
+this.props.translator.lowerCase().t('main.title'); // example title
+this.props.translator.snakeCase().t('main.title'); // example_title
+this.props.translator.kebabCase().t('main.title'); // example-title
+this.props.translator.startCase().t('main.title'); // Example Title
+this.props.translator.upperCase().t('main.title'); // EXAMPLE TITLE
+this.props.translator.upperFirst().t('main.title'); // Example title
 ```
 
 ## API
@@ -221,7 +236,6 @@ this.props.lang; // en
      ```
 
 ## TODO
- * Make transformation methods chainable
  * Make documentation easier to understand ;)
  * Add example app
 

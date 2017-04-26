@@ -9,6 +9,7 @@ const config = {
       pluralNotArray: 'Forms parameter for getPlural method is not an array',
       pluralNotNumber: 'Number parameter for getPlural method is not a number',
       PathNotProvided: 'Path to translations has not been provided',
+      PathFalsy: 'Path falsy'
     },
   },
 };
