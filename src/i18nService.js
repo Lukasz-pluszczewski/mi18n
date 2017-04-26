@@ -182,6 +182,29 @@ export const translatorFactory = {
       },
 
       getTranslatedString(path, replace = null, number = null) {
+        // checking if path is not provided
+        if (!arguments.length) {
+          logger.error(`${config.errors.i18n.PathNotProvided}: "${joinedPath}"`, {
+            language: translator.state.languageCode,
+            translatorNamespace: translator.translatorNamespace,
+            providedPath: path,
+            absolutePath: joinedPath,
+          });
+          throw new Error(config.errors.i18n.PathNotProvided);
+        }
+
+        // checking if provided falsy path (but not empty string)
+        if (!path && path !== '') {
+          logger.error(`${config.errors.i18n.PathFalsy}: ""`, {
+            language: translator.state.languageCode,
+            translatorNamespace: translator.translatorNamespace,
+            providedPath: path,
+            typeofProvidedPath: typeof path,
+            absolutePath: '',
+          });
+          return { result: '', joinedPath: '' };
+        }
+
         const filteredPath = _.filter([translator.translatorNamespace, path], path => _.isString(path) && path);
         if (!filteredPath.length) {
           throw new Error(config.errors.i18n.PathNotProvided);
@@ -243,46 +266,103 @@ export const translatorFactory = {
         return result.result;
       },
     };
-    translator.translate.capitalize
-      = (path, replace = null, number = null) => translator.translateWithCallback(path, replace, number, _.capitalize);
 
-    translator.translate.toUpper
-      = (path, replace = null, number = null) => translator.translateWithCallback(path, replace, number, _.toUpper);
+    // creating chainable translator with helper methods
+    const getTranslatorCallback = flags => translatedString => {
+      let transformedString = translatedString;
+      _.forEach(flags, (flagName) => {
+        transformedString = _[flagName](transformedString);
+      });
+      return transformedString;
+    };
+    const createChainableTranslator = (flags = []) => ({
+      capitalize() {
+        return createChainableTranslator([
+          ...flags,
+          'capitalize',
+        ]);
+      },
+      toUpper() {
+        return createChainableTranslator([
+          ...flags,
+          'toUpper',
+        ]);
+      },
+      toLower() {
+        return createChainableTranslator([
+          ...flags,
+          'toLower',
+        ]);
+      },
+      camelCase() {
+        return createChainableTranslator([
+          ...flags,
+          'camelCase',
+        ]);
+      },
+      lowerCase() {
+        return createChainableTranslator([
+          ...flags,
+          'lowerCase',
+        ]);
+      },
+      lowerFirst() {
+        return createChainableTranslator([
+          ...flags,
+          'lowerFirst',
+        ]);
+      },
+      snakeCase() {
+        return createChainableTranslator([
+          ...flags,
+          'snakeCase',
+        ]);
+      },
+      kebabCase() {
+        return createChainableTranslator([
+          ...flags,
+          'kebabCase',
+        ]);
+      },
+      startCase() {
+        return createChainableTranslator([
+          ...flags,
+          'startCase',
+        ]);
+      },
+      titleCase() {
+        return createChainableTranslator([
+          ...flags,
+          'startCase',
+        ]);
+      },
+      upperCase() {
+        return createChainableTranslator([
+          ...flags,
+          'upperCase',
+        ]);
+      },
+      upperFirst() {
+        return createChainableTranslator([
+          ...flags,
+          'upperFirst',
+        ]);
+      },
+      deburr() {
+        return createChainableTranslator([
+          ...flags,
+          'deburr',
+        ]);
+      },
+      translate(path, replace = null, number = null) {
+        return translator.translateWithCallback(path, replace, number, getTranslatorCallback(flags));
+      },
+      t(path, replace = null, number = null) {
+        return translator.translateWithCallback(path, replace, number, getTranslatorCallback(flags));
+      }
+    });
 
-    translator.translate.toLower
-      = (path, replace = null, number = null) => translator.translateWithCallback(path, replace, number, _.toLower);
-
-    translator.translate.camelCase
-      = (path, replace = null, number = null) => translator.translateWithCallback(path, replace, number, _.camelCase);
-
-    translator.translate.lowerCase
-      = (path, replace = null, number = null) => translator.translateWithCallback(path, replace, number, _.lowerCase);
-
-    translator.translate.lowerFirst
-      = (path, replace = null, number = null) => translator.translateWithCallback(path, replace, number, _.lowerFirst);
-
-    translator.translate.snakeCase
-      = (path, replace = null, number = null) => translator.translateWithCallback(path, replace, number, _.snakeCase);
-
-    translator.translate.kebabCase
-      = (path, replace = null, number = null) => translator.translateWithCallback(path, replace, number, _.kebabCase);
-
-    translator.translate.startCase
-      = (path, replace = null, number = null) => translator.translateWithCallback(path, replace, number, _.startCase);
-
-    translator.translate.titleCase
-      = (path, replace = null, number = null) => translator.translateWithCallback(path, replace, number, _.startCase);
-
-    translator.translate.upperCase
-      = (path, replace = null, number = null) => translator.translateWithCallback(path, replace, number, _.upperCase);
-
-    translator.translate.upperFirst
-      = (path, replace = null, number = null) => translator.translateWithCallback(path, replace, number, _.upperFirst);
-
-    translator.translate.deburr
-      = (path, replace = null, number = null) => translator.translateWithCallback(path, replace, number, _.deburr);
-
-    translator.t = translator.translate;
+    _.assign(translator, createChainableTranslator());
 
     translatorFactory.cachedTranslators[translatorNamespace] = translator;
     translatorFactory.cachedState = state;
