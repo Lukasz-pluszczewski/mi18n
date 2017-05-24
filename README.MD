@@ -191,14 +191,14 @@ this.props.translator.upperFirst().t('main.title'); // Example title
         - **replace**: *object* parameters that should be replaced in the translations
          - **number**: *number* number needed to decide which pluralizable translation to choose
      - methods
-        - `translator.translate.capitalize(path, [replace, number])`: *function* works like translate but returns capitalized translation
-        - `translator.translate.toUpper(path, [replace, number])`: *function* works like translate but returns uppercase translation
-        - `translator.translate.toLower(path, [replace, number])`: *function* works like translate but returns lowercase translation
-        - `translator.translate.camelCase(path, [replace, number])`: *function* works like translate but returns camelcase translation
-        - `translator.translate.lowerCase(path, [replace, number])`: *function* works like translate but returns lowercase translation
-        - `translator.translate.lowerFirst(path, [replace, number])`: *function* works like translate but returns translation with first letter changed to lowercase
-        - `translator.translate.titleCase(path, [replace, number])`: *function* works like translate but returns translation with first letter changed to uppercase
-        - `translator.translate.deburr(path, [replace, number])`: *function* works like translate but returns translation with all non latin letters changed to their latin counterparts
+        - `translator.translate.capitalize()`: *function* returns translator object with capitalize flag added
+        - `translator.translate.toUpper()`: *function* returns translator object with uppercase flag added
+        - `translator.translate.toLower()`: *function* returns translator object with lowercase flag added
+        - `translator.translate.camelCase()`: *function* returns translator object with camelcase flag added
+        - `translator.translate.lowerCase()`: *function* returns translator object with lowercase flag added
+        - `translator.translate.lowerFirst()`: *function* returns translator object with lowerFirst flag added
+        - `translator.translate.titleCase()`: *function* returns translator object with titleCase flag added
+        - `translator.translate.deburr()`: *function* returns translator object with deburr flag added
    - `translator.t(path, [replace, number])`: alias for `translator.translate`
    - `translator.namespace(namespace, [absolute])`: *function*
      - arguments

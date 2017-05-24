@@ -1,6 +1,6 @@
 {
   "name": "mi18n-redux",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MINTernationalization - i18n with redux made easy!",
   "repository": {
     "type": "git",
