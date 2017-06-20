@@ -46,6 +46,7 @@ export const translatorFactory = {
     if (
       translatorFactory.cachedState
       && state.languageCode === translatorFactory.cachedState.languageCode
+      && state.cachedState === state
     ) {
       if (translatorFactory.cachedTranslators[translatorNamespace]) {
         return translatorFactory.cachedTranslators[translatorNamespace];
