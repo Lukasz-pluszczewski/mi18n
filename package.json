@@ -10,14 +10,15 @@
   "module": "lib/mi18n.mjs",
   "jsnext:main": "lib/mi18n.mjs",
   "scripts": {
-    "prepublish": "NODE_PATH=src npm run build",
+    "prepublish": "npm run snyk-protect && NODE_PATH=src npm run build",
     "prebuild": "rimraf ./lib",
     "build": "NODE_PATH=src rollup -c",
     "watch": "NODE_PATH=src rollup -c -w",
     "lint": "esw rollup.config.js src --color",
     "test": "npm run mochatest --silent",
     "test:watch": "npm run mochatest -- --watch",
-    "mochatest": "NODE_PATH=src mocha tools/testSetup.js \"./test/**/*.js\""
+    "mochatest": "NODE_PATH=src mocha tools/testSetup.js \"./test/**/*.js\"",
+    "snyk-protect": "snyk protect"
   },
   "keywords": [
     "i18n",
@@ -47,6 +48,8 @@
   },
   "dependencies": {
     "debug": "2.6.1",
-    "lodash": "4.17.4"
-  }
+    "lodash": "4.17.4",
+    "snyk": "^1.316.1"
+  },
+  "snyk": true
 }
